@@ -59,7 +59,7 @@ app.get("/api/movies", function (req, res) {
     query = { $text: { $search: q } };
   }
   Movie.find(query, function (err, movies) {
-    res.json(movies);
+    return res.json(movies);
   }).limit(limit);
 });
 
@@ -75,9 +75,9 @@ app.post("/api/movies", function (req, res) {
   });
   newMovie.save(function (err) {
     if (err) {
-      res.json({ message: "Error adding movie" });
+      return res.json({ message: "Error adding movie" });
     }
-    res.json({ message: "Movie added successfully" });
+    return res.json({ message: "Movie added successfully" });
   });
 });
 
@@ -96,7 +96,7 @@ app.put("/api/movies/:name", function (req, res) {
       if (err) {
         console.log(err);
       } else {
-        res.json({ message: "Movie updated successfully" });
+        return res.json({ message: "Movie updated successfully" });
       }
     }
   );
@@ -110,9 +110,9 @@ app.patch("/api/movies/:name", function (req, res) {
 
   Movie.updateOne({ name: movieName }, { name: newName }, function (err) {
     if (err) {
-      res.json({ message: "Error updating movie" });
+      return res.json({ message: "Error updating movie" });
     }
-    res.json({ message: "Movie updated successfully" });
+    return res.json({ message: "Movie updated successfully" });
   });
 });
 
@@ -122,9 +122,9 @@ app.delete("/api/movies/:id", function (req, res) {
 
   Movie.deleteOne({ _id: paramID }, function (err) {
     if (err) {
-      res.json({ message: "Error deleting movie" });
+      return res.json({ message: "Error deleting movie" });
     }
-    res.json({ message: "Movie deleted successfully" });
+    return res.json({ message: "Movie deleted successfully" });
   });
 });
 
